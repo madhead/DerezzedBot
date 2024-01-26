@@ -1,5 +1,5 @@
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.8.20"
+    kotlin("jvm").version("1.9.22")
     application
 }
 
@@ -8,6 +8,12 @@ repositories {
 }
 
 dependencies {
+    implementation("io.ktor:ktor-server-core:2.3.7")
+    implementation("io.ktor:ktor-server-netty:2.3.7")
+    implementation("org.apache.logging.log4j:log4j-slf4j2-impl:2.22.1")
+    implementation("io.ktor:ktor-server-default-headers-jvm:2.3.7")
+    implementation("io.ktor:ktor-server-call-logging-jvm:2.3.7")
+    implementation("io.ktor:ktor-server-compression-jvm:2.3.7")
 }
 
 java {
@@ -17,5 +23,5 @@ java {
 }
 
 application {
-    mainClass.set("me.madhead.derezzed.AppKt")
+    mainClass = "me.madhead.derezzed.Derezzed"
 }
