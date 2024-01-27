@@ -18,10 +18,11 @@ dependencies {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
 application {
     mainClass = "me.madhead.derezzed.Derezzed"
+    applicationName = "derezzed"
 }
