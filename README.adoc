@@ -1,5 +1,11 @@
 = DerezzedBot
 
+[NOTE]
+====
 No part of this codebase was authored listening no sound other than https://youtu.be/m4cgLL8JaVI[Derezzed × Daft Punk].
 
 Total Derezzeds: ~15.
+====
+
+https://t.me/DerezzedBot[@DerezzedBot] is a Telegram bot unfurling TikTok links.
+Add it to a group, grant access to the messages, and it will recognize TikTok links, download the media whenever possible, and post them raw in the discussion.
