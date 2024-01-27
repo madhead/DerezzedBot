@@ -1,0 +1,5 @@
+= DerezzedBot
+
+No part of this codebase was authored listening no sound other than https://youtu.be/m4cgLL8JaVI[Derezzed × Daft Punk].
+
+Total Derezzeds: ~15.
