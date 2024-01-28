@@ -14,6 +14,8 @@ dependencies {
     implementation("io.ktor:ktor-server-default-headers-jvm:2.3.7")
     implementation("io.ktor:ktor-server-call-logging-jvm:2.3.7")
     implementation("io.ktor:ktor-server-compression-jvm:2.3.7")
+    implementation("dev.inmo:tgbotapi:10.0.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
 }
 
 java {

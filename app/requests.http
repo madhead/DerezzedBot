@@ -1,0 +1,7 @@
+### Set Webhook URL
+POST https://api.telegram.org/bot{{token}}/setWebhook HTTP/1.1
+Content-Type: application/json
+
+{
+  "url": "{{host}}/{{token}}"
+}
