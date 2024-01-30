@@ -5,3 +5,6 @@ Content-Type: application/json
 {
   "url": "{{host}}/{{token}}"
 }
+
+### Get Webhook URL
+GET https://api.telegram.org/bot{{token}}/getWebhookInfo HTTP/1.1

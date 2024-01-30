@@ -1,5 +1,6 @@
 package me.madhead.derezzed.routes
 
+import dev.inmo.tgbotapi.bot.ktor.telegramBot
 import dev.inmo.tgbotapi.types.update.abstracts.UpdateDeserializationStrategy
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.call
@@ -20,8 +21,9 @@ fun Route.webhook() {
     val json = Json {
         ignoreUnknownKeys = true
     }
+    val bot = telegramBot(config.property("telegram.token").getString())
     val pipeline = UpdateProcessingPipeline(
-        listOf(TikTokProcessor())
+        listOf(TikTokProcessor(bot))
     )
 
     localPort(config.property("deployment.port").getString().toInt()) {
