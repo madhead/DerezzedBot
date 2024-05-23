@@ -13,6 +13,7 @@ import io.ktor.server.routing.post
 import kotlinx.serialization.json.Json
 import me.madhead.derezzed.pipeline.UpdateProcessingPipeline
 import me.madhead.derezzed.pipeline.processors.TikTokProcessor
+import me.madhead.derezzed.pipeline.processors.YouTubeProcessor
 import org.apache.logging.log4j.LogManager
 
 fun Route.webhook() {
@@ -23,7 +24,10 @@ fun Route.webhook() {
     }
     val bot = telegramBot(config.property("telegram.token").getString())
     val pipeline = UpdateProcessingPipeline(
-        listOf(TikTokProcessor(bot))
+        listOf(
+            TikTokProcessor(bot),
+            YouTubeProcessor(bot),
+        )
     )
 
     localPort(config.property("deployment.port").getString().toInt()) {

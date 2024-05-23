@@ -16,23 +16,23 @@ import org.apache.logging.log4j.LogManager
 import kotlin.io.path.createTempFile
 import kotlin.io.path.deleteIfExists
 
-class TikTokProcessor(
+class YouTubeProcessor(
     private val bot: RequestsExecutor,
 ) : UpdateProcessor {
     companion object {
-        private val logger = LogManager.getLogger(TikTokProcessor::class.java)!!
+        private val logger = LogManager.getLogger(YouTubeProcessor::class.java)!!
     }
 
     override suspend fun process(update: Update): UpdateReaction? {
         val update = update as? MessageUpdate ?: return skip("Not a message update")
         val message = update.data as? ContentMessage<*> ?: return skip("Not a content message")
         val content = message.content as? TextContent ?: return skip("Not a text content")
-        val tikTokUrls = content.tikTokUrls() ?: return skip("No TikTok URLs found")
+        val youTubeUrls = content.youTubeUrls() ?: return skip("No YouTube URLs found")
 
-        logger.info("Found TikTok URLs: $tikTokUrls")
+        logger.info("Found YouTube URLs: $youTubeUrls")
 
         return {
-            tikTokUrls.forEach { url ->
+            youTubeUrls.forEach { url ->
                 val targetFile = createTempFile(suffix = ".mp4")
 
                 logger.info("Saving $url to $targetFile")
@@ -63,9 +63,13 @@ class TikTokProcessor(
         return null
     }
 
-    private fun TextContent.tikTokUrls(): List<String>? =
+    private fun TextContent.youTubeUrls(): List<String>? =
         textSources
             .mapNotNull { (it as? URLTextSource)?.source ?: (it as? TextLinkTextSource)?.url }
-            .mapNotNull { it.takeIf { it.contains("tiktok.com", ignoreCase = true) } }
+            .mapNotNull {
+                it.takeIf {
+                    it.contains("youtube.com", ignoreCase = true) || it.contains("youtu.be", ignoreCase = true)
+                }
+            }
             .takeUnless { it.isEmpty() }
 }
