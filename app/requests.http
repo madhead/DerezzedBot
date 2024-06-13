@@ -1,5 +1,5 @@
 ### Set Webhook URL
-POST https://api.telegram.org/bot{{token}}/setWebhook HTTP/1.1
+POST https://api.telegram.org/bot{{token}}/setWebhook
 Content-Type: application/json
 
 {
@@ -7,4 +7,4 @@ Content-Type: application/json
 }
 
 ### Get Webhook URL
-GET https://api.telegram.org/bot{{token}}/getWebhookInfo HTTP/1.1
+GET https://api.telegram.org/bot{{token}}/getWebhookInfo

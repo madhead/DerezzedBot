@@ -1,12 +1,12 @@
-app = 'derezzed'
+app = 'derezzed-bot'
 primary_region = 'ams'
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
 
 [env]
-  PORT = "8080"
-  MANAGEMENT_PORT = "8081"
+  PORT = '8080'
+  MANAGEMENT_PORT = '8081'
 
 [http_service]
   internal_port = 8080
@@ -18,4 +18,4 @@ primary_region = 'ams'
 [[vm]]
   cpu_kind = 'shared'
   cpus = 1
-  memory_mb = 512
+  memory = '512mb'
