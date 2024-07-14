@@ -39,7 +39,7 @@ class YouTubeProcessor(
 
                 val processBuilder = ProcessBuilder()
 
-                processBuilder.command("/usr/local/bin/yt-dlp", url, "--output", targetFile.toString(), "--force-overwrites", "--no-playlist")
+                processBuilder.command("/usr/local/bin/yt-dlp", url, "--playlist-items", "1", "--output", targetFile.toString(), "--force-overwrites", "--no-playlist")
                 processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT)
 
                 logger.info(processBuilder.command())
