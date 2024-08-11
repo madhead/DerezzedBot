@@ -12,28 +12,27 @@ import dev.inmo.tgbotapi.types.update.MessageUpdate
 import dev.inmo.tgbotapi.types.update.abstracts.Update
 import me.madhead.derezzed.pipeline.UpdateProcessor
 import me.madhead.derezzed.pipeline.UpdateReaction
-import me.madhead.derezzed.pipeline.processors.ReelProcessor.Companion
 import org.apache.logging.log4j.LogManager
 import kotlin.io.path.createTempFile
 import kotlin.io.path.deleteIfExists
 
-class YouTubeProcessor(
+class ReelProcessor(
     private val bot: RequestsExecutor,
 ) : UpdateProcessor {
     companion object {
-        private val logger = LogManager.getLogger(YouTubeProcessor::class.java)!!
+        private val logger = LogManager.getLogger(ReelProcessor::class.java)!!
     }
 
     override suspend fun process(update: Update): UpdateReaction? {
         val update = update as? MessageUpdate ?: return skip("Not a message update")
         val message = update.data as? ContentMessage<*> ?: return skip("Not a content message")
         val content = message.content as? TextContent ?: return skip("Not a text content")
-        val youTubeUrls = content.youTubeUrls() ?: return skip("No YouTube URLs found")
+        val reelUrls = content.reelUrls() ?: return skip("No YouTube URLs found")
 
-        logger.info("Found YouTube URLs: $youTubeUrls")
+        logger.info("Found Reel URLs: $reelUrls")
 
         return {
-            youTubeUrls.forEach { url ->
+            reelUrls.forEach { url ->
                 val targetFile = createTempFile(suffix = ".mp4")
 
                 logger.info("Saving $url to $targetFile")
@@ -43,12 +42,9 @@ class YouTubeProcessor(
                 processBuilder.command(
                     "/usr/local/bin/yt-dlp",
                     url,
-                    "--playlist-items",
-                    "1",
                     "--output",
                     targetFile.toString(),
                     "--force-overwrites",
-                    "--no-playlist",
                     "--verbose",
                     "--print-traffic",
                 )
@@ -80,12 +76,12 @@ class YouTubeProcessor(
         return null
     }
 
-    private fun TextContent.youTubeUrls(): List<String>? =
+    private fun TextContent.reelUrls(): List<String>? =
         textSources
             .mapNotNull { (it as? URLTextSource)?.source ?: (it as? TextLinkTextSource)?.url }
             .mapNotNull {
                 it.takeIf {
-                    it.contains("youtube.com", ignoreCase = true) || it.contains("youtu.be", ignoreCase = true)
+                    it.contains("instagram.com/reel", ignoreCase = true) || it.contains("instagram.com/reels", ignoreCase = true)
                 }
             }
             .takeUnless { it.isEmpty() }

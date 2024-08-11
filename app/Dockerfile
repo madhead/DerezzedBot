@@ -5,7 +5,7 @@ RUN apt-get update && \
       wget && \
     rm -rf /var/lib/apt/lists/*
 RUN wget -O /usr/local/bin/yt-dlp \
-    https://github.com/yt-dlp/yt-dlp/releases/download/2024.07.09/yt-dlp_linux && \
+    https://github.com/yt-dlp/yt-dlp/releases/download/2024.08.06/yt-dlp_linux && \
     chmod a+x /usr/local/bin/yt-dlp
 RUN adduser --system --group derezzed
 USER derezzed

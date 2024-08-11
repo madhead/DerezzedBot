@@ -12,6 +12,7 @@ import io.ktor.server.routing.localPort
 import io.ktor.server.routing.post
 import kotlinx.serialization.json.Json
 import me.madhead.derezzed.pipeline.UpdateProcessingPipeline
+import me.madhead.derezzed.pipeline.processors.ReelProcessor
 import me.madhead.derezzed.pipeline.processors.TikTokProcessor
 import me.madhead.derezzed.pipeline.processors.YouTubeProcessor
 import org.apache.logging.log4j.LogManager
@@ -27,6 +28,7 @@ fun Route.webhook() {
         listOf(
             TikTokProcessor(bot),
             YouTubeProcessor(bot),
+            ReelProcessor(bot),
         )
     )
 

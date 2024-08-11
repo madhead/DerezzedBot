@@ -12,6 +12,7 @@ import dev.inmo.tgbotapi.types.update.MessageUpdate
 import dev.inmo.tgbotapi.types.update.abstracts.Update
 import me.madhead.derezzed.pipeline.UpdateProcessor
 import me.madhead.derezzed.pipeline.UpdateReaction
+import me.madhead.derezzed.pipeline.processors.ReelProcessor.Companion
 import org.apache.logging.log4j.LogManager
 import kotlin.io.path.createTempFile
 import kotlin.io.path.deleteIfExists
@@ -39,18 +40,31 @@ class TikTokProcessor(
 
                 val processBuilder = ProcessBuilder()
 
-                processBuilder.command("/usr/local/bin/yt-dlp", url, "--output", targetFile.toString(), "--force-overwrites")
+                processBuilder.command(
+                    "/usr/local/bin/yt-dlp",
+                    url,
+                    "--output",
+                    targetFile.toString(),
+                    "--force-overwrites",
+                    "--verbose",
+                    "--print-traffic",
+                )
                 processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT)
 
                 logger.info(processBuilder.command())
 
                 processBuilder.start().waitFor()
-
-                bot.sendVideo(
-                    chat = message.chat,
-                    video = targetFile.toFile().asMultipartFile(),
-                    replyParameters = ReplyParameters(message = message),
-                )
+                    .also {
+                        logger.info("yt-dlp exit code: $it")
+                    }
+                    .takeIf { it == 0 }
+                    ?.let {
+                        bot.sendVideo(
+                            chat = message.chat,
+                            video = targetFile.toFile().asMultipartFile(),
+                            replyParameters = ReplyParameters(message = message),
+                        )
+                    }
 
                 targetFile.deleteIfExists()
             }
