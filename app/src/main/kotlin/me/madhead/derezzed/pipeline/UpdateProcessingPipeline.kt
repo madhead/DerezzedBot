@@ -1,7 +1,6 @@
 package me.madhead.derezzed.pipeline
 
 import dev.inmo.tgbotapi.types.update.abstracts.Update
-import me.madhead.derezzed.telegram.chatId
 import org.apache.logging.log4j.LogManager
 
 class UpdateProcessingPipeline(
@@ -13,8 +12,6 @@ class UpdateProcessingPipeline(
 
     suspend fun process(update: Update) {
         logger.debug("Processing update: {}", update)
-
-        logger.info("Chat ID: {}", update.chatId)
 
         processors
             .mapNotNull { it.process(update) }

@@ -7,6 +7,7 @@ import io.ktor.server.plugins.compression.Compression
 import io.ktor.server.plugins.defaultheaders.DefaultHeaders
 import io.ktor.server.routing.routing
 import me.madhead.derezzed.routes.webhook
+import me.madhead.derezzed.routes.content
 
 fun Application.derezzed() {
     install(DefaultHeaders)
@@ -15,5 +16,6 @@ fun Application.derezzed() {
 
     routing {
         webhook()
+        content()
     }
 }

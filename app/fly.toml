@@ -19,3 +19,7 @@ primary_region = 'ams'
   cpu_kind = 'shared'
   cpus = 1
   memory = '512mb'
+
+[[mounts]]
+  source = "derezzed_bot_data"
+  destination = "/data"

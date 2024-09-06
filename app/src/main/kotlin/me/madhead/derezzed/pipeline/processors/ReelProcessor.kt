@@ -46,9 +46,10 @@ class ReelProcessor(
                     targetFile.toString(),
                     "--force-overwrites",
                     "--verbose",
-                    "--print-traffic",
+                    // "--print-traffic",
                 )
                 processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT)
+                processBuilder.redirectError(ProcessBuilder.Redirect.INHERIT)
 
                 logger.info(processBuilder.command())
 

@@ -12,7 +12,6 @@ import dev.inmo.tgbotapi.types.update.MessageUpdate
 import dev.inmo.tgbotapi.types.update.abstracts.Update
 import me.madhead.derezzed.pipeline.UpdateProcessor
 import me.madhead.derezzed.pipeline.UpdateReaction
-import me.madhead.derezzed.pipeline.processors.ReelProcessor.Companion
 import org.apache.logging.log4j.LogManager
 import kotlin.io.path.createTempFile
 import kotlin.io.path.deleteIfExists
@@ -47,9 +46,10 @@ class TikTokProcessor(
                     targetFile.toString(),
                     "--force-overwrites",
                     "--verbose",
-                    "--print-traffic",
+                    // "--print-traffic",
                 )
                 processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT)
+                processBuilder.redirectError(ProcessBuilder.Redirect.INHERIT)
 
                 logger.info(processBuilder.command())
 
