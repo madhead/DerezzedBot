@@ -50,7 +50,7 @@ class XProcessor(
             .mapNotNull { (it as? URLTextSource)?.source ?: (it as? TextLinkTextSource)?.url }
             .mapNotNull {
                 it.takeIf {
-                    it.contains(Regex("x\\.com", RegexOption.IGNORE_CASE)) ||
+                    it.contains(Regex("(?<!fixup)x\\.com", RegexOption.IGNORE_CASE)) ||
                         it.contains(Regex("(?<!(vx)|(fx))twitter\\.com", RegexOption.IGNORE_CASE))
                 }
             }

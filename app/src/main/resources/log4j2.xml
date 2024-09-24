@@ -1,11 +1,7 @@
 <Configuration status="WARN" shutdownHook="disable">
     <Appenders>
         <Console name="STDOUT" target="SYSTEM_OUT">
-            <PatternLayout disableAnsi="false">
-                <Pattern>
-                    %d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} %highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=green bold, TRACE=blue} %style{}{magenta} [%M] %style{%30c{1.}}{cyan} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%xEx}
-                </Pattern>
-            </PatternLayout>
+            <JsonTemplateLayout eventTemplateUri="classpath:JsonLayout.json"/>
         </Console>
     </Appenders>
 

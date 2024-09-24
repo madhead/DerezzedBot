@@ -44,7 +44,8 @@ class TikTokInlineQueryProcessor(
                 targetFile.toString(),
                 "--force-overwrites",
                 "--verbose",
-                // "--print-traffic",
+                "--format",
+                "b[url!^='https://www.tiktok.com']",
                 "--write-thumbnail",
                 "--write-info-json",
             )

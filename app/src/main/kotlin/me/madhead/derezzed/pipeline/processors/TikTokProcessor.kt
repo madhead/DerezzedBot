@@ -46,7 +46,8 @@ class TikTokProcessor(
                     targetFile.toString(),
                     "--force-overwrites",
                     "--verbose",
-                    // "--print-traffic",
+                    "--format",
+                    "b[url!^='https://www.tiktok.com']",
                 )
                 processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT)
                 processBuilder.redirectError(ProcessBuilder.Redirect.INHERIT)
