@@ -42,9 +42,12 @@ class TikTokProcessor(
                 processBuilder.command(
                     "/usr/local/bin/yt-dlp",
                     url,
+                    "--playlist-items",
+                    "1",
                     "--output",
                     targetFile.toString(),
                     "--force-overwrites",
+                    "--no-playlist",
                     "--verbose",
                     "--format",
                     "b[url!^='https://www.tiktok.com']",

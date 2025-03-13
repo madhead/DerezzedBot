@@ -40,9 +40,12 @@ class TikTokInlineQueryProcessor(
             processBuilder.command(
                 "/usr/local/bin/yt-dlp",
                 tikTokUrl,
+                "--playlist-items",
+                "1",
                 "--output",
                 targetFile.toString(),
                 "--force-overwrites",
+                "--no-playlist",
                 "--verbose",
                 "--format",
                 "b[url!^='https://www.tiktok.com']",
